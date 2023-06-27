@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "631705683197",
+    "project_id": "tastyeatsapp",
+    "storage_bucket": "tastyeatsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631705683197:android:9924a1ab33f0f294922a94",
+        "android_client_info": {
+          "package_name": "com.nezrin.tastyeats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631705683197-dq81q6g9plolk4n1pg4dpduns7g9c97k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb8st6oRUztupnehxXUVlJmNIHKdCswWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631705683197-dq81q6g9plolk4n1pg4dpduns7g9c97k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
