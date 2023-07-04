@@ -1,12 +1,10 @@
-package com.nezrin.tastyeats.presentation.view.fragments
+package com.nezrin.tastyeats.presentation.view.fragments.home
 
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,9 +18,9 @@ import com.nezrin.tastyeats.common.PreferenceHelper.set
 import com.nezrin.tastyeats.data.model.MealsByCategory
 import com.nezrin.tastyeats.data.model.Meal
 import com.nezrin.tastyeats.databinding.FragmentHomeBinding
-import com.nezrin.tastyeats.presentation.view.activities.CategoryMealActivity
-import com.nezrin.tastyeats.presentation.view.activities.MealActivity
-import com.nezrin.tastyeats.viewmodel.HomeFragmentViewModel
+import com.nezrin.tastyeats.presentation.view.activities.category_meal.CategoryMealActivity
+import com.nezrin.tastyeats.presentation.view.activities.meal.MealActivity
+import com.nezrin.tastyeats.presentation.view.fragments.meal_bottom_sheet.MealBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -95,7 +93,7 @@ class HomeFragment : Fragment() {
         onCategoryClick()
         onPopularItemLongClick()
         onSearchItemClick()
-        logoutClick()
+        popupLogoutClick()
         return binding.root
     }
 
@@ -144,12 +142,25 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
     }
-    private fun logoutClick(){
-        binding.buttonLogout.setOnClickListener {
-            sharedPreferences["email"]=null
-            sharedPreferences["password"]=null
-            findNavController().navigate(HomeFragmentDirections.fromHomeToLogin())
 
+
+    private fun popupLogoutClick(){
+        binding.imgMenu.setOnClickListener {
+            val popup=androidx.appcompat.widget.PopupMenu(requireContext(),binding.imgMenu)
+            popup.menuInflater.inflate(R.menu.popup_logout,popup.menu)
+
+            popup.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.logout_menu ->{
+                        sharedPreferences["email"]=null
+                        sharedPreferences["password"]=null
+                        findNavController().navigate(HomeFragmentDirections.fromHomeToLogin())
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popup.show()
         }
     }
-}
+    }

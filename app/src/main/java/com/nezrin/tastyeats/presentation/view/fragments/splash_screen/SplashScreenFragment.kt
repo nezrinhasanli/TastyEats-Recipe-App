@@ -1,4 +1,4 @@
-package com.nezrin.tastyeats.presentation.view.fragments
+package com.nezrin.tastyeats.presentation.view.fragments.splash_screen
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -14,7 +14,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nezrin.tastyeats.R
 import com.nezrin.tastyeats.common.PreferenceHelper
-import com.nezrin.tastyeats.databinding.FragmentSplashScreenBinding
 
 
 class SplashScreenFragment : Fragment() {

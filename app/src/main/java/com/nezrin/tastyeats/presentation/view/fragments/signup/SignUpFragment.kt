@@ -1,4 +1,4 @@
-package com.nezrin.tastyeats.presentation.view.fragments
+package com.nezrin.tastyeats.presentation.view.fragments.signup
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.nezrin.tastyeats.R
 import com.nezrin.tastyeats.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment() {

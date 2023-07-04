@@ -1,8 +1,7 @@
-package com.nezrin.tastyeats.presentation.view.fragments
+package com.nezrin.tastyeats.presentation.view.fragments.favorites
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,33 +18,26 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nezrin.tastyeats.presentation.adapters.MealsAdapter
 import com.nezrin.tastyeats.data.model.Meal
-import com.nezrin.tastyeats.data.model.MealList
 import com.nezrin.tastyeats.databinding.FragmentFavoritesBinding
 import com.nezrin.tastyeats.presentation.adapters.OnMealClickListener
-import com.nezrin.tastyeats.presentation.view.activities.MealActivity
-import com.nezrin.tastyeats.presentation.view.fragments.HomeFragment.Companion.MEAL_ID
-import com.nezrin.tastyeats.presentation.view.fragments.HomeFragment.Companion.MEAL_NAME
-import com.nezrin.tastyeats.presentation.view.fragments.HomeFragment.Companion.MEAL_THUMB
-import com.nezrin.tastyeats.viewmodel.HomeFragmentViewModel
+import com.nezrin.tastyeats.presentation.view.activities.meal.MealActivity
+import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragment.Companion.MEAL_ID
+import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragment.Companion.MEAL_NAME
+import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragment.Companion.MEAL_THUMB
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 
 class FavoritesFragment : Fragment() {
     private lateinit var binding: FragmentFavoritesBinding
-//    private val viewModel by viewModels<HomeFragmentViewModel>()
     private lateinit var favoritesAdapter: MealsAdapter
-    private lateinit var arrayList: ArrayList<Meal>
+    private val viewModel by viewModels<FavoriteFragmentViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-
-        arrayList = ArrayList()
 
         //favorite meal adapter
         favoritesAdapter = MealsAdapter(object : OnMealClickListener {
@@ -63,6 +55,9 @@ class FavoritesFragment : Fragment() {
         binding.rvFavorites.layoutManager =
             GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 
+        viewModel.favMealLiveData.observe(viewLifecycleOwner){
+            favoritesAdapter.setAllMealsList(it)
+        }
 
         //delete items from favorites
         val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
@@ -90,8 +85,6 @@ class FavoritesFragment : Fragment() {
         ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rvFavorites)
 
 
-        getFavoriteInfo()
-
         return binding.root
     }
 
@@ -116,47 +109,4 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    private fun getFavoriteInfo() {
-        Firebase.firestore.collection("Favorite Meals").document(Firebase.auth.currentUser!!.uid)
-            .addSnapshotListener { value, error ->
-
-                if (error != null) {
-                    Log.e("TAG", "getFavoriteInfo: ${error.localizedMessage}", )
-
-                    return@addSnapshotListener
-                }
-                if (value != null) {
-                    try {
-                        arrayList.clear()
-                        val datas = value.data as HashMap<*,*>
-                        for (data in datas) {
-                            val value = data.value as HashMap<*,*>
-                            val mealName = value["mealName"] as String
-                            val mealImg = value["mealImg"] as String
-                            val mealId = value["mealId"] as String
-                            val mealKey = value["mealKey"] as String
-                            val favoriteMeal = Meal(
-                                idMeal = mealId,
-                                strMeal = mealName,
-                                strMealThumb = mealImg,
-                                mealKey = mealKey
-                            )
-//
-//                            if (id==mealId){
-//                                // fab butonun seklin deyisdir
-//                                return@addSnapshotListener
-//                            }
-                            arrayList.add(favoriteMeal)
-
-                        }
-                        Log.e("TAG", "getFavoriteInfo: ${arrayList.toString()}", )
-
-                        favoritesAdapter.setAllMealsList(arrayList)
-                    } catch (e: java.lang.Exception) {
-
-                    }
-
-                }
-            }
-    }
 }

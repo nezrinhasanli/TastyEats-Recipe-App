@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nezrin.tastyeats.data.model.Category
-import com.nezrin.tastyeats.data.model.MealsByCategory
 import com.nezrin.tastyeats.databinding.CategoryItemsBinding
 
 class CategoryAdapter:RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {

@@ -45,14 +45,10 @@ class MealsAdapter(private  var onMealClickListener: OnMealClickListener
         notifyDataSetChanged()
     }
 
-    fun setOnMealClickListener(onFavoriteClickListener: OnMealClickListener) {
-        this.onMealClickListener = onFavoriteClickListener
-    }
 
     fun getMealByPosition(position: Int): Meal {
         return allMeals[position]
     }
-
 
 }
 interface OnMealClickListener {

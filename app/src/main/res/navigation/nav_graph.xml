@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.nezrin.tastyeats.presentation.view.fragments.HomeFragment"
+        android:name="com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,22 +19,22 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.nezrin.tastyeats.presentation.view.fragments.FavoritesFragment"
+        android:name="com.nezrin.tastyeats.presentation.view.fragments.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.nezrin.tastyeats.presentation.view.fragments.CategoriesFragment"
+        android:name="com.nezrin.tastyeats.presentation.view.fragments.categories.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.nezrin.tastyeats.presentation.view.fragments.SearchFragment"
+        android:name="com.nezrin.tastyeats.presentation.view.fragments.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.nezrin.tastyeats.presentation.view.fragments.LoginFragment"
+        android:name="com.nezrin.tastyeats.presentation.view.fragments.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.nezrin.tastyeats.presentation.view.fragments.SignUpFragment"
+        android:name="com.nezrin.tastyeats.presentation.view.fragments.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.nezrin.tastyeats.presentation.view.fragments.SplashScreenFragment"
+        android:name="com.nezrin.tastyeats.presentation.view.fragments.splash_screen.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action

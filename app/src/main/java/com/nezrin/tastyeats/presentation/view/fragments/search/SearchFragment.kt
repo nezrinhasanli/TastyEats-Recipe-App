@@ -1,4 +1,4 @@
-package com.nezrin.tastyeats.presentation.view.fragments
+package com.nezrin.tastyeats.presentation.view.fragments.search
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,8 +14,9 @@ import com.nezrin.tastyeats.presentation.adapters.MealsAdapter
 import com.nezrin.tastyeats.data.model.Meal
 import com.nezrin.tastyeats.databinding.FragmentSearchBinding
 import com.nezrin.tastyeats.presentation.adapters.OnMealClickListener
-import com.nezrin.tastyeats.presentation.view.activities.MealActivity
-import com.nezrin.tastyeats.viewmodel.HomeFragmentViewModel
+import com.nezrin.tastyeats.presentation.view.activities.meal.MealActivity
+import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragment
+import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

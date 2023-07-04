@@ -1,4 +1,4 @@
-package com.nezrin.tastyeats.presentation.view.fragments
+package com.nezrin.tastyeats.presentation.view.fragments.meal_bottom_sheet
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,9 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nezrin.tastyeats.databinding.FragmentMealBottomSheetBinding
-import com.nezrin.tastyeats.presentation.view.activities.MealActivity
-import com.nezrin.tastyeats.viewmodel.HomeFragmentViewModel
+import com.nezrin.tastyeats.presentation.view.activities.meal.MealActivity
+import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragment
+import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val MEAL_ID="param1"

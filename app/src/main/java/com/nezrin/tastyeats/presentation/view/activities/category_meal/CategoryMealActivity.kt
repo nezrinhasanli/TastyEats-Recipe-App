@@ -1,4 +1,4 @@
-package com.nezrin.tastyeats.presentation.view.activities
+package com.nezrin.tastyeats.presentation.view.activities.category_meal
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,21 +6,17 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nezrin.tastyeats.data.model.Meal
-import com.nezrin.tastyeats.presentation.adapters.CategoryMealsAdapter
 import com.nezrin.tastyeats.databinding.ActivityCategoryMealBinding
 import com.nezrin.tastyeats.presentation.adapters.MealsAdapter
 import com.nezrin.tastyeats.presentation.adapters.OnMealClickListener
-import com.nezrin.tastyeats.presentation.adapters.PopularMealAdapter
-import com.nezrin.tastyeats.presentation.view.fragments.HomeFragment
-import com.nezrin.tastyeats.viewmodel.CategoryMealActivityViewModel
+import com.nezrin.tastyeats.presentation.view.activities.meal.MealActivity
+import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CategoryMealActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCategoryMealBinding
     private val viewModel by viewModels<CategoryMealActivityViewModel>()
-
-    //    private lateinit var categoryMealsAdapter: CategoryMealsAdapter
     private lateinit var mealsAdapter: MealsAdapter
 
 
@@ -28,7 +24,6 @@ class CategoryMealActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         mealsAdapter = MealsAdapter(object : OnMealClickListener {
             override fun onMealClick(meal: Meal) {
@@ -41,7 +36,6 @@ class CategoryMealActivity : AppCompatActivity() {
 
         })
 
-/*categoryMealsAdapter = CategoryMealsAdapter()*/
         binding.mealRecyclerview.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = mealsAdapter
