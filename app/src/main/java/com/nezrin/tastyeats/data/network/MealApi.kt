@@ -14,7 +14,7 @@ interface MealApi {
    suspend fun getMealById(@Query("i") id:String):Response<MealList>
 
     @GET("filter.php")
-   suspend fun getPopularItems(@Query("c") categoryName:String):Response<MealsByCategoryList>
+   suspend fun getPopularMeals(@Query("c") categoryName:String):Response<MealsByCategoryList>
 
     @GET("categories.php")
    suspend fun getCategories(): Response<CategoryList>

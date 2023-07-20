@@ -7,11 +7,11 @@ import javax.inject.Inject
 
 class MealRepository @Inject constructor(private val api:MealApi) {
 
-    suspend fun getRandomMealRepo(): Response<MealList> {
+    suspend fun getRandomMeal(): Response<MealList> {
         return api.getRandomMeal()
     }
-    suspend fun getPopularItems(): Response<MealsByCategoryList> {
-        return api.getPopularItems("SeaFood")
+    suspend fun getPopularMeals(): Response<MealsByCategoryList> {
+        return api.getPopularMeals("SeaFood")
     }
     suspend fun getCategories(): Response<CategoryList> {
         return api.getCategories()

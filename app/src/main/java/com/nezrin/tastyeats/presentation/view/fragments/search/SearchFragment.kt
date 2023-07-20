@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nezrin.tastyeats.presentation.adapters.MealsAdapter
 import com.nezrin.tastyeats.data.model.Meal
@@ -18,6 +20,9 @@ import com.nezrin.tastyeats.presentation.view.activities.meal.MealActivity
 import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragment
 import com.nezrin.tastyeats.presentation.view.fragments.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 
@@ -60,14 +65,14 @@ class SearchFragment : Fragment() {
                 }
             }
 
-//        var searchJob:Job?=null
-//        binding.edSearch.addTextChangedListener {
-//            searchJob?.cancel()
-//            searchJob=lifecycleScope.launch {
-//                delay(500)
-//                viewModel.searchMeal(it.toString())
-//            }
-//        }
+        var searchJob: Job?=null
+        binding.edSearch.addTextChangedListener {
+            searchJob?.cancel()
+            searchJob=lifecycleScope.launch {
+                delay(500)
+                viewModel.searchMeal(it.toString())
+            }
+        }
 
 
         return binding.root

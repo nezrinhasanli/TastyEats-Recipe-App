@@ -36,7 +36,7 @@ class CategoriesFragment : Fragment() {
         binding.rvCategories.layoutManager =
             GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
 
-        viewModel.getCategoriesVM()
+        viewModel.getCategories()
         viewModel.categoryItemsLiveData.observe(viewLifecycleOwner) {
 
             categoriesAdapter.setCategoryList(it)

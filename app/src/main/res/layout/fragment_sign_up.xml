@@ -36,13 +36,23 @@
                 android:textStyle="bold"
                 android:textColor="@color/lavender"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/signup_username"
+                android:background="@drawable/border"
+                android:layout_marginTop="40dp"
+                android:padding="8dp"
+                android:hint="Username"
+                android:drawablePadding="8dp"
+                android:textColor="@color/gray"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/signup_email"
                 android:background="@drawable/border"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Email"
                 android:drawablePadding="8dp"

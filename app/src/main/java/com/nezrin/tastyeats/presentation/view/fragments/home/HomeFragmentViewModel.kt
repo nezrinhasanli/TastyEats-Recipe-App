@@ -24,13 +24,10 @@ class HomeFragmentViewModel @Inject constructor(private val repo:MealRepository)
     var searchMealLiveData = MutableLiveData<List<Meal>>()
 
 
-    //init {
-//    getRandomMealVM() //for rotate
-//}
-    fun getRandomMealVM() {
+    fun getRandomMeal() {
 
         viewModelScope.launch {
-            val response = repo.getRandomMealRepo()
+            val response = repo.getRandomMeal()
             if (response.isSuccessful) {
                 val mealResponse = response.body()
                 randomMealLiveData.postValue(mealResponse!!.meals)
@@ -38,9 +35,9 @@ class HomeFragmentViewModel @Inject constructor(private val repo:MealRepository)
         }
     }
 
-    fun getPopularItemsVM() {
+    fun getPopularMeals() {
         viewModelScope.launch {
-            val response = repo.getPopularItems()
+            val response = repo.getPopularMeals()
             if (response.isSuccessful) {
                 val mealResponse = response.body()
                 popularItemsLiveData.postValue(mealResponse!!.meals)
@@ -48,7 +45,7 @@ class HomeFragmentViewModel @Inject constructor(private val repo:MealRepository)
         }
     }
 
-    fun getCategoriesVM() {
+    fun getCategories() {
         viewModelScope.launch {
             val response = repo.getCategories()
             if (response.isSuccessful) {

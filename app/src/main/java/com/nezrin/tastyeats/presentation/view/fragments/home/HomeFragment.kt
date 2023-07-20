@@ -31,7 +31,6 @@ class HomeFragment : Fragment() {
     private lateinit var randomMeal: Meal
     private lateinit var popularItemsAdapter: PopularMealAdapter
     private lateinit var categoryAdapter: CategoryAdapter
-    private lateinit var sharedPreferences: SharedPreferences
 
 
     companion object {
@@ -47,7 +46,6 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        sharedPreferences= PreferenceHelper.getDefault(requireActivity())
 
         //popular meal adapter
         popularItemsAdapter = PopularMealAdapter()
@@ -63,10 +61,9 @@ class HomeFragment : Fragment() {
         binding.recyclerViewCategory.layoutManager =
             GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
 
-//        viewModel = (activity as MainActivity).viewModel
 
         //random meal view model
-        viewModel.getRandomMealVM()
+        viewModel.getRandomMeal()
         viewModel.randomMealLiveData.observe(viewLifecycleOwner) {
             Glide.with(this@HomeFragment)
                 .load(it!![0].strMealThumb)
@@ -77,7 +74,7 @@ class HomeFragment : Fragment() {
         onRandomMealClick()
 
         //popular item view model
-        viewModel.getPopularItemsVM()
+        viewModel.getPopularMeals()
         viewModel.popularItemsLiveData.observe(viewLifecycleOwner) {
 
             popularItemsAdapter.setMeals(it as ArrayList<MealsByCategory>)
@@ -85,15 +82,16 @@ class HomeFragment : Fragment() {
         onPopularItemClick()
 
         //category view model
-        viewModel.getCategoriesVM()
+        viewModel.getCategories()
         viewModel.categoryItemsLiveData.observe(viewLifecycleOwner) {
 
             categoryAdapter.setCategoryList(it)
         }
         onCategoryClick()
+
         onPopularItemLongClick()
         onSearchItemClick()
-        popupLogoutClick()
+
         return binding.root
     }
 
@@ -130,7 +128,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun onRandomMealClick() {
         binding.randomMeal.setOnClickListener {
 
@@ -143,24 +140,4 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-    private fun popupLogoutClick(){
-        binding.imgMenu.setOnClickListener {
-            val popup=androidx.appcompat.widget.PopupMenu(requireContext(),binding.imgMenu)
-            popup.menuInflater.inflate(R.menu.popup_logout,popup.menu)
-
-            popup.setOnMenuItemClickListener {
-                when(it.itemId){
-                    R.id.logout_menu ->{
-                        sharedPreferences["email"]=null
-                        sharedPreferences["password"]=null
-                        findNavController().navigate(HomeFragmentDirections.fromHomeToLogin())
-                        true
-                    }
-                    else -> false
-                }
-            }
-            popup.show()
-        }
-    }
     }

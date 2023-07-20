@@ -1,11 +1,14 @@
 package com.nezrin.tastyeats.presentation.view.activities.meal
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
@@ -58,10 +61,10 @@ class MealActivity : AppCompatActivity() {
             youtubeLink = meal.strYoutube
         }
 
-
         onFavoriteClick()
     }
 
+    @SuppressLint("ShowToast")
     private fun onFavoriteClick() {
         binding.buttonFav.setOnClickListener {
             mealToSave?.let {
@@ -69,11 +72,9 @@ class MealActivity : AppCompatActivity() {
                     addFavoriteToFirebase()
 
                 }
-
             }
         }
     }
-
 
     private fun onYoutubeImgClick(it:Meal) {
         val videoUrl=it.strYoutube
@@ -130,6 +131,8 @@ class MealActivity : AppCompatActivity() {
 
         if (binding.buttonFav.tag == "isFavorite") {
 
+            Toast.makeText(this, "Meal removed", Toast.LENGTH_SHORT).show()
+
             Firebase.firestore.collection("Favorite Meals")
                 .document(Firebase.auth.currentUser!!.uid)
                 .update(currentMealKey, FieldValue.delete())
@@ -149,6 +152,9 @@ class MealActivity : AppCompatActivity() {
 
             Firebase.firestore.collection("Favorite Meals")
                 .document(Firebase.auth.currentUser!!.uid).set(hMapKey, SetOptions.merge())
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Meal saved", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 
@@ -180,7 +186,6 @@ class MealActivity : AppCompatActivity() {
                                     binding.buttonFav.tag = "isNotFavorite"
                                     binding.buttonFav.setImageResource(R.drawable.ic_favorite_2)
                                 }
-
                             }
                         }
                     }

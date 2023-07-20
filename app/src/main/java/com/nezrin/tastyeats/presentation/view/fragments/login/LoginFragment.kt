@@ -43,7 +43,9 @@ class LoginFragment : Fragment() {
                     sharedPreferences["email"]=email
                     sharedPreferences["password"]=password
 
+                    Toast.makeText(requireContext(), "Logged in", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(LoginFragmentDirections.fromLoginToHome())
+
                 }
                     .addOnFailureListener {
 

@@ -19,9 +19,9 @@ private const val MEAL_ID="param1"
 
 class MealBottomSheetFragment : BottomSheetDialogFragment() {
 
-    private var mealId:String?=null
     private lateinit var binding:FragmentMealBottomSheetBinding
     private val viewModel by viewModels<HomeFragmentViewModel>()
+    private var mealId:String?=null
     private var mealName:String?=null
     private var mealThumb:String?=null
 
@@ -38,12 +38,12 @@ class MealBottomSheetFragment : BottomSheetDialogFragment() {
 
         binding=FragmentMealBottomSheetBinding.inflate(inflater,container,false)
 
-//        viewModel = (activity as MainActivity).viewModel
 
         viewModel.getMealByID(mealId!!)
         viewModel.bottomSheetLiveData.observe(viewLifecycleOwner){
 
             Glide.with(this).load(it.strMealThumb).into(binding.imgCategoryBottom)
+
             binding.tvMealCountry.text=it.strArea
             binding.tvMealCategory.text=it.strCategory
             binding.tvMealNameInBtmsheet.text=it.strMeal

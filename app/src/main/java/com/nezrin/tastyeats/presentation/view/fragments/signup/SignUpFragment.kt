@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -23,19 +24,26 @@ class SignUpFragment : Fragment() {
         binding.signupButton.setOnClickListener {
             val email = binding.signupEmail.text.toString()
             val password = binding.signupPassword.text.toString()
+            val username = binding.signupUsername.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                Firebase.auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
+
+            if (email.isNotEmpty() && password.isNotEmpty() && username.isNotEmpty()) {
+                Firebase.auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener {
 
                     val hmap= hashMapOf<String,Any>()
                     hmap["email"]=email
                     hmap["password"]=password
+                    hmap["imageUrl"]="https://firebasestorage.googleapis.com/v0/b/tastyeatsapp.appspot.com/o/pp.jpg?alt=media&token=751a0c84-eb42-44a1-8451-fcf00e83bb77"
+                    hmap["username"]=username
 
                     Firebase.firestore.collection("Users")
                         .document(Firebase.auth.currentUser!!.uid)
                         .set(hmap)
 
-                    Toast.makeText(requireContext(), "Signed Up", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(SignUpFragmentDirections.fromSignupToLogin())
+
+                    Toast.makeText(requireContext(), "Signed Up Successfully", Toast.LENGTH_SHORT).show()
+
                 }
                     .addOnFailureListener {
 
